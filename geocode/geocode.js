@@ -2,9 +2,7 @@ const request = require('request');
 
 var geocode = (address) => {
   const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address='
-  let address = args.address;
   let url = baseURL + encodeURIComponent(address);
-}
 
 request({
   url: url,
@@ -26,7 +24,7 @@ request({
 } else {
   console.log(body.error_message)
 }
-});
+})};
 
 module.exports = {
   geocode
