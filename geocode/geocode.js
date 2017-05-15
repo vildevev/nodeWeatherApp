@@ -29,7 +29,7 @@ request({
 };
 
 var queryDarkSky = (latLng) => {
-  var baseURL = 'https://api.darksky.net/forecast/4d13194a64c26a3b07e2522d08daa476/';
+  var baseURL = 'https://api.darksky.net/forecast/API_KEY/';
   var url = baseURL + encodeURIComponent(`${latLng.lat},${latLng.lng}`);
   request({
     url: url,
