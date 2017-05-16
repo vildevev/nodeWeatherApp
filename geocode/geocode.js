@@ -4,10 +4,10 @@ var geocode = (address) => {
   const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address='
   let url = baseURL + encodeURIComponent(address);
 
-request({
-  url: url,
-  json: true
-}, (error, response, body) => {
+  request({
+    url: url,
+    json: true
+  }, (error, response, body) => {
   if (error) {
     console.log('there is an error')
     console.log(error)
@@ -18,14 +18,14 @@ request({
     let latLng = results.geometry.location;
     queryDarkSky(latLng);
 
-} else if (body.status === 'ZERO_RESULTS') {
-    console.log('I am sorry. No address match found');
+  } else if (body.status === 'ZERO_RESULTS') {
+      console.log('I am sorry. No address match found');
+      return undefined
+  } else {
+    console.log(body.error_messages);
     return undefined
-} else {
-  console.log(body.error_messages);
-  return undefined
-}
-})
+    }
+  })
 };
 
 var queryDarkSky = (latLng) => {
@@ -40,7 +40,6 @@ var queryDarkSky = (latLng) => {
       console.log("Could not connect to Dark Sky servers");
       console.log(error);
     } else {
-
       console.log("Horray! We were able to connect to DarkSky servers");
       console.log(body.currently.temperature);
       console.log(body.daily.summary);

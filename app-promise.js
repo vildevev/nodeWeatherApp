@@ -8,8 +8,8 @@ const args = require('yargs')
       string: true,
       alias: 'address',
       describe: 'The address for for which to fetch weather'
+      })
     })
-  })
   .help()
   .argv;
 
@@ -27,11 +27,11 @@ axios.get(url).then((response) => {
   let baseWeatherURL = `https://api.darksky.net/forecast/${process.env.DARK_SKY_API_KEY}/`;
   let weatherURL = baseWeatherURL + encodeURIComponent(`${latitude}, ${longitude}`)
   return axios.get(weatherURL)
-}).then((response) => {
-  console.log(`The temperature is ${response.data.currently.temperature}, it feels like ${response.data.currently.apparentTemperature}`)
-}).catch((e) => {
-  if (e.code === 'ENOTFOUND'){
-    console.log('Unable to connect to Google servers')
-  }
-  console.log(e.message)
+  }).then((response) => {
+    console.log(`The temperature is ${response.data.currently.temperature}, it feels like ${response.data.currently.apparentTemperature}`)
+  }).catch((e) => {
+    if (e.code === 'ENOTFOUND'){
+      console.log('Unable to connect to Google servers')
+    }
+    console.log(e.message)
 })
